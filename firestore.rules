@@ -1,0 +1,43 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // 0. Global safety net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Common helpers
+    function isSignedIn() { return request.auth != null; }
+    function isVerified() { return isSignedIn() && request.auth.token.email_verified == true; }
+    function isAdmin() { 
+      return isVerified() && request.auth.token.email == "coopedill@gmail.com";
+    }
+    function isValidId(id) { 
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); 
+    }
+    
+    // Project Validation
+    function isValidProject(data) {
+      return data.keys().hasAll(['title', 'description', 'imageUrl', 'tags', 'role', 'createdAt'])
+        && data.keys().size() == 6
+        && data.title is string && data.title.size() <= 200
+        && data.description is string && data.description.size() <= 2000
+        && data.imageUrl is string && data.imageUrl.size() <= 2000
+        && data.role is string && data.role.size() <= 100
+        && data.tags is list && data.tags.size() <= 20
+        && data.createdAt is timestamp;
+    }
+
+    match /projects/{projectId} {
+      allow get, list: if true; // Public read
+      
+      allow create: if isAdmin() && isValidId(projectId) && isValidProject(request.resource.data)
+        && request.resource.data.createdAt == request.time;
+        
+      allow update: if isAdmin() && isValidProject(request.resource.data)
+        && request.resource.data.createdAt == resource.data.createdAt; // Immutable createdAt
+        
+      allow delete: if isAdmin();
+    }
+  }
+}
