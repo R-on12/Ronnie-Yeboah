@@ -20,6 +20,7 @@ export default function Portfolio() {
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [user, setUser] = useState(auth.currentUser);
   const [loading, setLoading] = useState(true);
+  const [isGenerating, setIsGenerating] = useState(false);
 
   // Form State
   const [newProject, setNewProject] = useState({
@@ -87,6 +88,33 @@ export default function Portfolio() {
       await deleteDoc(doc(db, "projects", id));
     } catch (error) {
       handleFirestoreError(error, OperationType.DELETE, `projects/${id}`);
+    }
+  };
+
+  const handleAIGenerate = async () => {
+    if (!newProject.title) return;
+    setIsGenerating(true);
+    try {
+      const response = await fetch("/api/generate-image", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: newProject.title,
+          description: newProject.description,
+          prompt: "Artisan style, traditional painting"
+        }),
+      });
+      const data = await response.json();
+      if (data.imageUrl) {
+        setNewProject({ ...newProject, imageUrl: data.imageUrl });
+      } else {
+        throw new Error(data.error || "Failed to generate image");
+      }
+    } catch (error) {
+      console.error("AI Generation failed:", error);
+      alert("AI generation failed. Please try again or check your console.");
+    } finally {
+      setIsGenerating(false);
     }
   };
 
@@ -248,19 +276,75 @@ export default function Portfolio() {
                       className="w-full bg-zinc-50 border border-brand-border p-3 text-sm focus:outline-none focus:border-brand-accent font-bold uppercase transition-colors" 
                     />
                   </div>
-                  <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted">Image URL (Unsplash/Direct Link)</label>
-                    <div className="relative">
-                      <ImageIcon className="absolute left-3 top-1/2 -translate-y-1/2 text-brand-muted" size={16} />
-                      <input 
-                        required
-                        type="url" 
-                        placeholder="https://..."
-                        value={newProject.imageUrl}
-                        onChange={e => setNewProject({...newProject, imageUrl: e.target.value})}
-                        className="w-full bg-zinc-50 border border-brand-border p-3 pl-10 text-xs focus:outline-none focus:border-brand-accent transition-colors" 
-                      />
+                  <div className="space-y-4">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted">Project Cover Image</label>
+                    <div className="border-2 border-dashed border-brand-border p-8 text-center bg-zinc-50 flex flex-col items-center justify-center gap-4 group/drop transition-all hover:bg-zinc-100 min-h-[200px]">
+                      {newProject.imageUrl ? (
+                        <div className="relative w-full group">
+                          <img 
+                            src={newProject.imageUrl} 
+                            alt="Preview" 
+                            className="w-full aspect-video object-cover border border-brand-border"
+                          />
+                          <button 
+                            type="button"
+                            onClick={() => setNewProject({...newProject, imageUrl: ""})}
+                            className="absolute top-2 right-2 bg-brand-text text-brand-bg p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
+                          >
+                            <Trash2 size={14} />
+                          </button>
+                        </div>
+                      ) : (
+                        <>
+                          <div className="w-12 h-12 rounded-full bg-brand-border/30 flex items-center justify-center text-brand-muted">
+                            <ImageIcon size={20} />
+                          </div>
+                          <div>
+                            <p className="text-[10px] font-black uppercase tracking-widest text-brand-text mb-1">No Image Selected</p>
+                            <p className="text-[9px] font-bold text-brand-muted uppercase">Generate a unique cover using AI</p>
+                          </div>
+                          <div className="flex flex-col sm:flex-row gap-3 mt-2 w-full max-w-sm">
+                            <button
+                              type="button"
+                              disabled={!newProject.title || isGenerating}
+                              onClick={handleAIGenerate}
+                              className="flex-1 bg-brand-text text-brand-bg px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:scale-105 disabled:opacity-50 disabled:grayscale disabled:hover:scale-100 flex items-center justify-center gap-2"
+                            >
+                              {isGenerating ? (
+                                <span className="animate-spin text-brand-accent">✸</span>
+                              ) : (
+                                <span className="text-brand-accent">✸</span>
+                              )}
+                              {isGenerating ? "Synthesizing..." : "AI Generate"}
+                            </button>
+                            
+                            <label className="flex-1 cursor-pointer">
+                              <input 
+                                type="file" 
+                                className="hidden" 
+                                accept="image/*"
+                                onChange={(e) => {
+                                  const file = e.target.files?.[0];
+                                  if (file) {
+                                    const reader = new FileReader();
+                                    reader.onloadend = () => {
+                                      setNewProject({...newProject, imageUrl: reader.result as string});
+                                    };
+                                    reader.readAsDataURL(file);
+                                  }
+                                }}
+                              />
+                              <div className="bg-zinc-200 text-brand-text px-4 py-2 rounded-full text-[10px] font-black uppercase tracking-[0.2em] transition-all hover:bg-zinc-300 flex items-center justify-center gap-2 text-center h-full">
+                                <Upload size={14} /> Upload from PC
+                              </div>
+                            </label>
+                          </div>
+                        </>
+                      )}
                     </div>
+                    {!newProject.title && !newProject.imageUrl && (
+                      <p className="text-[9px] text-brand-accent font-black uppercase tracking-widest text-center">Add a title to enable AI generation</p>
+                    )}
                   </div>
                   <div className="space-y-2">
                     <label className="text-[10px] font-black uppercase tracking-widest text-brand-muted">Tags (comma separated)</label>

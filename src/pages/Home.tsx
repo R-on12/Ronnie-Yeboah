@@ -32,11 +32,11 @@ export default function Home({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boolea
               animate={{ opacity: 1, y: 0 }}
             >
               <h1 className="text-6xl md:text-8xl font-black leading-[0.85] tracking-tighter italic uppercase mb-6">
-                CREATIVE<br />
+                ARTISAN<br />
                 <span className="text-brand-accent">DIRECTOR</span>
               </h1>
               <p className="text-brand-muted text-[13px] leading-relaxed max-w-[320px]">
-                Ronnie Yeboah. Crafting high-performance digital experiences through minimalist aesthetics, traditional animation mastery, and AI precision.
+                Ronnie Yeboah. A fusion of <strong>traditional painting mastery</strong> and <strong>animation precision</strong>. Bridging the gap between classical artistry and modern AI-driven visual solutions.
               </p>
             </motion.div>
           </div>

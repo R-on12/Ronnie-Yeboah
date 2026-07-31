@@ -15,7 +15,12 @@
 
 @layer base {
   body {
-    @apply bg-brand-bg text-brand-text font-sans antialiased;
+    @apply bg-brand-bg text-brand-text font-sans antialiased relative;
+    background-image: 
+      url('https://www.transparenttextures.com/patterns/felt-pads.png'),
+      linear-gradient(to right, var(--color-brand-border) 0.5px, transparent 0.5px),
+      linear-gradient(to bottom, var(--color-brand-border) 0.5px, transparent 0.5px);
+    background-size: auto, 100px 100px, 100px 100px;
   }
   
   h1, h2, h3, h4 {
