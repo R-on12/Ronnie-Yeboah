@@ -32,7 +32,7 @@ export const PROJECTS: Project[] = [
     title: "The Classical Brush in AI",
     description: "Infusing traditional painting techniques into AI annotation workflows to improve depth perception and edge accuracy for creative models.",
     tags: ["Fine Arts", "AI Training", "Visual Logic"],
-    role: "Project Manager",
+    role: "AI Project Manager",
     imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800"
   },
   {

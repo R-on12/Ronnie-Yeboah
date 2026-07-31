@@ -31,9 +31,9 @@ export default function Home({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boolea
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <h1 className="text-6xl md:text-8xl font-black leading-[0.85] tracking-tighter italic uppercase mb-6">
-                ARTISAN<br />
-                <span className="text-brand-accent">DIRECTOR</span>
+              <h1 className="text-4xl md:text-6xl font-black leading-[0.9] tracking-tighter italic uppercase mb-6">
+                ARTISAN DIRECTOR /<br />
+                <span className="text-brand-accent">AI ANNOTATOR</span>
               </h1>
               <p className="text-brand-muted text-[13px] leading-relaxed max-w-[320px]">
                 Ronnie Yeboah. A fusion of <strong>traditional painting mastery</strong> and <strong>animation precision</strong>. Bridging the gap between classical artistry and modern AI-driven visual solutions.
@@ -145,9 +145,17 @@ export default function Home({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boolea
                  Start a<br />Conversation
                </h2>
                <p className="text-brand-bg/50 text-[11px] font-bold uppercase tracking-widest max-w-[280px]">Currently open for strategic creative roles and global remote opportunities.</p>
-               <div className="pt-4 space-y-4">
+               <div className="pt-4 space-y-3">
                   <a href="mailto:coopedill@gmail.com" className="block text-2xl font-black hover:text-brand-accent transition-colors">COOPEDILL@GMAIL.COM</a>
                   <p className="text-xs font-black text-brand-accent tracking-[0.2em] uppercase">+233 54 959 8055</p>
+                  <a 
+                    href="https://www.linkedin.com/in/ronnie-yeboah-8a4958231" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="inline-flex items-center gap-2 text-xs font-black tracking-[0.15em] uppercase text-brand-bg/80 hover:text-brand-accent transition-colors pt-1"
+                  >
+                    <Linkedin size={14} /> linkedin.com/in/ronnie-yeboah-8a4958231
+                  </a>
                </div>
              </div>
              <div className="absolute -top-12 -right-12 w-64 h-64 border border-brand-bg/10 rounded-full" />
