@@ -53,10 +53,10 @@ export const PROJECTS: Project[] = [
   },
   {
     id: "4",
-    title: "Artistic Identity Systems",
-    description: "Developing brand identities rooted in commercial painting theory and color psychology.",
-    tags: ["Branding", "Fine Art Theory", "UI"],
-    role: "Creative Lead",
+    title: "Artistic Identity Systems & Product UI",
+    description: "Developing comprehensive brand identities and product design systems rooted in user experience, fine art theory, and color psychology.",
+    tags: ["Product Design", "UI/UX Systems", "Fine Art Theory"],
+    role: "Lead Product Designer & Creative Lead",
     imageUrl: "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?auto=format&fit=crop&q=80&w=800"
   },
   {
@@ -80,22 +80,22 @@ export const PROJECTS: Project[] = [
 export const EXPERIENCES: Experience[] = [
   {
     company: "DATAMAKER GH",
-    role: "PROJECT MANAGER (AI MACHINE LEARNING LEAD)",
+    role: "PROJECT MANAGER (AI MACHINE LEARNING LEAD & PRODUCT DESIGN)",
     period: "2023 – Present",
     highlights: [
       "Oversee end-to-end AI/ML project lifecycles, leading cross-functional teams to deliver high-precision computer vision and machine learning datasets.",
-      "Architect data labeling strategies, quality control protocols, and annotation pipelines ensuring 99%+ model accuracy and SLA compliance.",
+      "Architect intuitive data labeling interfaces, UI/UX workflows, and annotation pipelines ensuring 99%+ model accuracy and SLA compliance.",
       "Direct 50+ AI specialists in data curation, edge-case analysis, and model validation across complex computer vision and generative AI projects.",
-      "Optimize machine learning delivery workflows and resource management, bridging artistic precision with technical ML execution."
+      "Optimize product design workflows and resource management, bridging human-centered UI/UX design with technical ML execution."
     ]
   },
   {
     company: "GLOBAL DIGNITY FORUM",
-    role: "Lead Storyteller & Designer",
+    role: "Lead Storyteller & Product Designer",
     period: "Volunteer",
     highlights: [
-      "Designed visual campaigns using classical illustration styles to convey complex human emotions.",
-      "Provided photography and concept art that bridges traditional aesthetics with modern social issues."
+      "Designed visual campaigns and user-centric web assets using classical illustration styles to convey complex human emotions.",
+      "Provided photography, product UI design, and concept art that bridges traditional aesthetics with modern social issues."
     ]
   },
   {
@@ -133,6 +133,6 @@ export const EDUCATION: Education[] = [
 ];
 
 export const SKILLS = {
-  technical: ["Adobe Photoshop", "After Effects", "Adobe Animate", "Figma", "Blender", "TV Paint", "Microsoft Office", "Canva"],
-  core: ["Project Planning", "AI Data Annotation", "Graphic Design", "Photography", "Visual Communication", "Team Management"]
+  technical: ["Figma (UI/UX)", "Adobe Photoshop", "After Effects", "Adobe Animate", "Blender", "TV Paint", "Microsoft Office", "Canva"],
+  core: ["Product Design", "UI/UX Strategy", "Project Planning", "AI Data Annotation", "Graphic Design", "Photography", "Visual Communication", "Team Management"]
 };

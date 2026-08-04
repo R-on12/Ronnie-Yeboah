@@ -31,12 +31,13 @@ export default function Home({ isMenuOpen, setIsMenuOpen }: { isMenuOpen: boolea
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
             >
-              <h1 className="text-4xl md:text-6xl font-black leading-[0.9] tracking-tighter italic uppercase mb-6">
-                ARTISAN DIRECTOR /<br />
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black leading-[0.95] tracking-tighter italic uppercase mb-6">
+                PRODUCT DESIGNER /<br />
+                ARTISAN DIRECTOR &amp;<br />
                 <span className="text-brand-accent">AI ANNOTATOR</span>
               </h1>
-              <p className="text-brand-muted text-[13px] leading-relaxed max-w-[320px]">
-                Ronnie Yeboah. A fusion of <strong>traditional painting mastery</strong> and <strong>animation precision</strong>. Bridging the gap between classical artistry and modern AI-driven visual solutions.
+              <p className="text-brand-muted text-[13px] leading-relaxed max-w-[340px]">
+                Ronnie Yeboah. A fusion of <strong>product design strategy</strong>, <strong>traditional painting mastery</strong>, and <strong>animation precision</strong>. Bridging human-centered UI/UX design, classical artistry, and modern AI-driven visual solutions.
               </p>
             </motion.div>
           </div>
